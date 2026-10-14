@@ -77,15 +77,15 @@ logger:
 external_components:
   - source:
       type: git
-      url: https://github.com/javierconfoie/esphome-ld6004
+      url: https://github.com/heo-huang/esphome-ld6004
       ref: main
     components: [hlk_ld6004]
 
 # UART for the LD6004 sensor
 uart:
   id: uart_ld6004
-  tx_pin: GPIO21
-  rx_pin: GPIO20
+  tx_pin: GPIO17
+  rx_pin: GPIO18
   baud_rate: 115200
 
 # Hub component
