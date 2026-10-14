@@ -1,5 +1,6 @@
 #include "hlk_ld6004.h"
 #include "esphome/core/log.h"
+#include <inttypes.h>
 
 namespace esphome {
 namespace hlk_ld6004 {
@@ -38,7 +39,7 @@ void HLKLD6004Component::loop() {
   if (!this->data_frames_received_ && (millis() - this->last_init_attempt_ > 5000)) {
     this->last_init_attempt_ = millis();
     this->init_retries_++;
-    ESP_LOGD(TAG, "No data frames yet, retrying config queries (attempt %u)...", this->init_retries_);
+    ESP_LOGD(TAG, "No data frames yet, retrying config queries (attempt %)...", this->init_retries_);
     this->set_timeout("retry_config", 500, [this]() { this->query_all_config_(); });
   }
 
@@ -46,8 +47,8 @@ void HLKLD6004Component::loop() {
 
 void HLKLD6004Component::dump_config() {
   ESP_LOGCONFIG(TAG, "HLK-LD6004:");
-  ESP_LOGCONFIG(TAG, "  Frames received: %u", this->frames_received_);
-  ESP_LOGCONFIG(TAG, "  Checksum errors: %u", this->checksum_errors_);
+  ESP_LOGCONFIG(TAG, "  Frames received: %", this->frames_received_);
+  ESP_LOGCONFIG(TAG, "  Checksum errors: %", this->checksum_errors_);
   if (this->fw_major_ > 0 || this->fw_sub_ > 0) {
     ESP_LOGCONFIG(TAG, "  Firmware: %u.%u.%u (project %u)", this->fw_major_, this->fw_sub_,
                   this->fw_modified_, this->fw_project_);
