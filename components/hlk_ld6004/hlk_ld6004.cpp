@@ -473,7 +473,7 @@ void HLKLD6004Component::query_all_config_() {
   static const uint8_t N = sizeof(queries) / sizeof(queries[0]);
   for (uint8_t i = 0; i < N; i++) {
     const uint16_t cmd = queries[i];
-    this->set_timeout("cfg_q" + std::to_string(i), i * 150, [this, cmd]() {
+    this->set_timeout(0x1000 + i, i * 150, [this, cmd]() {
       ESP_LOGD(TAG, "Config query cmd=0x%04X", cmd);
       if (cmd == 0xFFFF)
         this->request_firmware_version();
